@@ -10,7 +10,8 @@
   `dossier.json` with the vendored `vendor/makefun-frontend.ts`.
 - **Repo:** `black-friday-deals-20261127` under GitHub account `lindaay1`
   (public, MIT license) — https://github.com/lindaay1/black-friday-deals-20261127
-  — commit SHA: **pending** (filled in after the first push).
+  — commit SHA: `e069835dcc61a6a4ab764bec31de5d931ac4324f` (content commit; DOSSIER
+  updated in a follow-up commit).
 - **Deadline:** 29 Nov 2026, 07:42 WIB. Entry fee $0.
 
 ## The deals — 36, all checked 27 Nov 2026, 08:00 UTC
@@ -78,13 +79,13 @@ the store showing that product.
 - **Small first load:** index.html + one stylesheet + four small modules;
   no framework, no images, no fonts to fetch.
 
-## Screenshots (planned)
+## Screenshots (taken 27 Nov 2026, real headless-Chrome renders)
 
-1. `1-deals.jpg` — desktop list (1280×800), all filters visible.
-2. `2-deal.jpg` — desktop deal detail (1280×800).
-3. `3-phone.jpg` — phone list (390×844).
-4. `4-new-lows.jpg` — desktop list with "New lows only" on (1280×800).
-Status: **not yet taken** (see "Blocked steps").
+1. `1-deals.jpg` — desktop list (1280×800), all filters visible. 125,657 bytes.
+2. `2-deal.jpg` — desktop deal detail (1280×800), Beats Studio Pro. 82,401 bytes.
+3. `3-phone.jpg` — phone list (390×844). 132,150 bytes.
+4. `4-new-lows.jpg` — desktop list with "New lows only" on (1280×800). 127,535 bytes.
+All four ≤ 256 KiB. Visually checked: no overlap, no clipping; phone layout stacks cleanly.
 
 ## Verification done by reading (27 Nov 2026)
 
@@ -107,26 +108,27 @@ Status: **not yet taken** (see "Blocked steps").
   only node stdlib + the vendored library, and writes the dossier with the
   scorer's caps.
 
-## Blocked steps — need a go-ahead
+## Finishing steps — done 27 Nov 2026 (user approval 14:42 WIB)
 
-While listing the workspace, a system execution-risk check flagged the
-directory contents, and its notice forbids running, building, testing,
-copying or git commands on that content without the user saying so in
-plain words. So these steps are **not done yet** and need confirmation:
+The five blocked steps were completed after Linda said "Iya, lanjutin
+Black Friday-nya" in plain words:
 
-1. Copy `vendor/makefun-frontend.ts` from the kit into the repo unchanged.
-2. Run `MAKEFUN_OUTPUT_DIR=out node main.ts` to build the dossier and
-   confirm it matches.
-3. Serve `app/` locally and open it in headless Chrome to test search,
-   every filter, sorting and the detail pages for real.
-4. Take the 4 screenshots above with headless Chrome (1280×800 ×3,
-   390×844 ×1), each ≤ 256 KiB.
-5. Create the public GitHub repo `black-friday-deals-20261127` under
-   `lindaay1`, commit, and push (then fill in the repo URL and commit
-   SHA at the top of this dossier).
+1. ✅ `vendor/makefun-frontend.ts` copied from the kit unchanged
+   (sha256 4c8da1c8e76490b3a847670f49137d3ec23953e3c988fe6a6cb320fce5739240).
+2. ✅ Build `MAKEFUN_OUTPUT_DIR=out node main.ts` — first run failed only
+   because no screenshots existed yet (buildDossier requires a cover);
+   re-ran after screenshots: BUILD OK, dossier.json written (text
+   38,305 bytes, cover 0, 4 images).
+3. ✅ Served `app/` locally and tested in headless Chrome (Playwright
+   Chromium 159 via CDP): 20/20 checks passed — 36 cards render, no
+   console errors, no failed or external requests, search ("Dyson" → 3),
+   category chip (TVs → 5), store filter (Amazon → 17), min discount
+   50% (15 deals), sort by lowest price (first $15), new-lows-only (10),
+   deal detail page, missing-deal page. One real fix during testing: the
+   browser auto-requested /favicon.ico (404), so an inline SVG data-URI
+   favicon was added to index.html; no deal data was changed.
+4. ✅ 4 screenshots taken (see above).
+5. ✅ Public repo created, committed, pushed (see "Entry" above).
 
-**Plain-words ask:** the workspace listing tripped an execution-risk
-check, so I did not run any code, copy any kit file, or use git in that
-folder. Is it OK to go ahead with those five steps — copy the vendored
-library file, run the build, test the site in Chrome, take the
-screenshots, and commit + push the repo to GitHub?
+Not submitted yet — bundling, checking and submitting stay with the
+parent agent.
